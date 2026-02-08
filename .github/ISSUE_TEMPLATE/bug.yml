@@ -1,0 +1,60 @@
+name: Bug Report
+description: Report a bug in the AI Ethical Stack
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug. Please fill in as much detail as possible.
+  - type: dropdown
+    id: repo
+    attributes:
+      label: Affected Repository
+      description: Which repository is affected?
+      options:
+        - abigail (agent)
+        - SAO (orchestrator)
+        - Ethical_AI_Reg (ethics layer)
+        - Phoenix (coordination)
+        - Multiple / Cross-repo
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of what the bug is.
+      placeholder: Describe the bug...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to ...
+        2. Run ...
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+      placeholder: Describe expected behavior...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Rust version, Python version, browser, etc.
+      placeholder: |
+        - OS: Windows 11
+        - Rust: 1.76
+        - Python: 3.12
+    validations:
+      required: false

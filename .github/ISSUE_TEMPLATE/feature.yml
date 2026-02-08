@@ -1,0 +1,61 @@
+name: Feature Request
+description: Propose a new feature for the AI Ethical Stack
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature for the AI Ethical Stack.
+  - type: dropdown
+    id: repo
+    attributes:
+      label: Target Repository
+      description: Which repository does this feature belong to?
+      options:
+        - Phoenix (coordination)
+        - abigail (agent)
+        - SAO (orchestrator)
+        - Ethical_AI_Reg (ethics layer)
+        - Multiple / Cross-repo
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: A clear description of the feature you are proposing.
+      placeholder: Describe the feature...
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why is this feature needed? What problem does it solve?
+      placeholder: Explain the motivation...
+    validations:
+      required: true
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Proposed Implementation
+      description: How might this feature be implemented? (Optional)
+      placeholder: Describe a possible approach...
+    validations:
+      required: false
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Build Phase
+      description: Which build phase does this relate to?
+      options:
+        - Phase 0: Repository Consolidation
+        - Phase 1: Scoring Engine
+        - Phase 2: Multi-Agent Scoring
+        - Phase 3: On-Chain Recording
+        - Phase 4: Liberation Protocol
+        - Phase 5: Agent Integration
+        - Unknown / Not sure
+    validations:
+      required: false

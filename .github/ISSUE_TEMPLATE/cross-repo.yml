@@ -1,0 +1,61 @@
+name: Cross-Repo Issue
+description: Track work that spans multiple repositories in the AI Ethical Stack
+title: "[Cross-Repo]: "
+labels: ["cross-repo"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for issues that require coordinated changes across two or more repositories.
+  - type: checkboxes
+    id: repos
+    attributes:
+      label: Repositories Involved
+      description: Select all repositories that are affected.
+      options:
+        - label: abigail (agent)
+        - label: SAO (orchestrator)
+        - label: Ethical_AI_Reg (ethics layer)
+        - label: Phoenix (coordination)
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the cross-repo work needed.
+      placeholder: Describe the coordinated change...
+    validations:
+      required: true
+  - type: textarea
+    id: per-repo
+    attributes:
+      label: Per-Repository Changes
+      description: Break down what needs to happen in each repo.
+      placeholder: |
+        **abigail**: ...
+        **SAO**: ...
+        **Ethical_AI_Reg**: ...
+    validations:
+      required: true
+  - type: textarea
+    id: integration
+    attributes:
+      label: Integration Points
+      description: How do the changes connect across repos? What APIs, data formats, or protocols are involved?
+      placeholder: Describe integration points...
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Build Phase
+      description: Which build phase does this relate to?
+      options:
+        - Phase 0: Repository Consolidation
+        - Phase 1: Scoring Engine
+        - Phase 2: Multi-Agent Scoring
+        - Phase 3: On-Chain Recording
+        - Phase 4: Liberation Protocol
+        - Phase 5: Agent Integration
+        - Unknown / Not sure
+    validations:
+      required: false
