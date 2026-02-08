@@ -1,0 +1,6 @@
+title: "AI Ethical Stack"
+description: "Coordinating Abigail (agent), SAO (orchestrator), and Ethical AI Reg (ethics platform)"
+theme: minima
+markdown: kramdown
+plugins:
+  - jekyll-seo-tag
