@@ -5,7 +5,7 @@
 The AI Ethical Stack uses two "loosely coupled, tightly linked" blockchains to make ethical evaluations tamper-proof and verifiable. This is the **Phase 3** component of the build plan.
 
 ```
-Agent (abigail)
+Agent (orion_dock)
   |  sends response for ethical evaluation
   v
 SAO (orchestrator)
@@ -117,7 +117,7 @@ The EOB references PVB data hashes when evaluating ethical claims that involve p
 
 ### What Does NOT Exist Yet
 
-- No blockchain code in abigail, SAO, or Ethical_AI_Reg
+- No blockchain code in orion_dock, SAO, or Ethical_AI_Reg
 - No Hardhat project configuration (Solidity contracts exist but aren't in a build pipeline)
 - No cross-chain messaging between EOB and PVB
 - No integration between the scoring API and the blockchain recording layer

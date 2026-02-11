@@ -8,7 +8,7 @@ The AI Ethical Stack consists of three repositories that form a layered architec
   User Desktop                       Server Infrastructure
  +--------------+                   +------------------------+
  |              |   REST/WS         |                        |
- |   Abigail    | ----------------> |         SAO            |
+ |  Orion Dock  | ----------------> |         SAO            |
  |  (Tauri 2.0) |   (optional)      |  (Axum + PostgreSQL)   |
  |              |                   |                        |
  +--------------+                   +----------+-------------+
@@ -25,7 +25,7 @@ The AI Ethical Stack consists of three repositories that form a layered architec
 
 ## Layer Responsibilities
 
-### Abigail (Agent Layer)
+### Orion Dock (Agent Layer)
 - **Runtime**: Tauri 2.0 desktop application (Rust backend, React frontend)
 - **Identity**: Ed25519 keypair generated at birth, stored in OS-level secure storage (DPAPI on Windows)
 - **Persistence**: Local SQLite database for conversation history, ethical scores, and agent state
@@ -35,7 +35,7 @@ The AI Ethical Stack consists of three repositories that form a layered architec
 
 ### SAO (Orchestration Layer)
 - **Runtime**: Headless Axum server (Rust)
-- **Multi-Agent Management**: Registers, authenticates, and manages multiple Abigail agent instances
+- **Multi-Agent Management**: Registers, authenticates, and manages multiple Orion Dock agent instances
 - **Identity Verification**: Validates agent Ed25519 signatures before accepting connections
 - **Communication**: REST API + WebSocket for real-time agent coordination
 - **Persistence**: PostgreSQL for cross-agent data, identity registry, and audit logs
@@ -54,10 +54,10 @@ The AI Ethical Stack consists of three repositories that form a layered architec
 
 ## Communication Protocols
 
-### Abigail <-> SAO
+### Orion Dock <-> SAO
 - **Transport**: HTTPS REST + WSS WebSocket
 - **Authentication**: Ed25519 signature on every request
-- **Connection Model**: Optional -- Abigail works fully standalone
+- **Connection Model**: Optional -- Orion Dock works fully standalone
 - **Data Flow**: Agent state sync, ethical evaluation requests, identity verification
 
 ### SAO <-> Ethical_AI_Reg

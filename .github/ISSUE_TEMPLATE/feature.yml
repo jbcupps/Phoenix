@@ -14,7 +14,7 @@ body:
       description: Which repository does this feature belong to?
       options:
         - Phoenix (coordination)
-        - abigail (agent)
+        - orion_dock (agent)
         - SAO (orchestrator)
         - Ethical_AI_Reg (ethics layer)
         - Multiple / Cross-repo

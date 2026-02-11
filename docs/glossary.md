@@ -16,7 +16,7 @@ The name Triangle refers to the original three classical pillars; the full model
 A graduated autonomy system where an AI agent earns increasing levels of independence through demonstrated ethical character over time. Rather than imposing permanent constraints, Liberation Protocol treats alignment as a developmental process -- analogous to a child growing into a trustworthy adult. Autonomy levels are unlocked based on consistent ethical scoring history, not arbitrary time gates.
 
 ## Bicameral Routing
-Abigail's dual-pathway decision architecture, inspired by the bicameral mind hypothesis:
+Orion Dock's dual-pathway decision architecture, inspired by the bicameral mind hypothesis:
 - **Id Path**: Fast, instinctive responses driven by pattern matching and trained intuition. Handles routine interactions where ethical risk is low.
 - **Ego Path**: Slower, deliberate reasoning that engages the full ethical evaluation pipeline. Activated when the Id detects moral complexity, novelty, or potential harm.
 
@@ -31,12 +31,12 @@ The set of foundational markdown files that define an agent's core identity and 
 These documents are cryptographically signed with the agent's Ed25519 key and verified at every boot to ensure they have not been tampered with.
 
 ## Id / Ego
-The two decision-making subsystems within Abigail's bicameral architecture:
+The two decision-making subsystems within Orion Dock's bicameral architecture:
 - **Id**: The instinctive layer -- fast pattern matching, emotional intelligence, intuitive responses. Named after the Freudian concept but implemented as a practical routing mechanism.
 - **Ego**: The reflective layer -- deliberate reasoning, ethical evaluation, long-term consequence analysis. Engages when the situation demands careful thought.
 
 ## Birth Flow
-The initialization sequence when an Abigail agent is launched for the first time:
+The initialization sequence when an Orion Dock agent is launched for the first time:
 1. Generate Ed25519 keypair (agent identity)
 2. Store private key in OS-level secure storage (DPAPI/Keychain)
 3. Load and sign constitutional documents (soul.md, ethics.md, instincts.md)

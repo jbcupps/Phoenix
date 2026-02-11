@@ -13,7 +13,7 @@ body:
       label: Repositories Involved
       description: Select all repositories that are affected.
       options:
-        - label: abigail (agent)
+        - label: orion_dock (agent)
         - label: SAO (orchestrator)
         - label: Ethical_AI_Reg (ethics layer)
         - label: Phoenix (coordination)
@@ -31,7 +31,7 @@ body:
       label: Per-Repository Changes
       description: Break down what needs to happen in each repo.
       placeholder: |
-        **abigail**: ...
+        **orion_dock**: ...
         **SAO**: ...
         **Ethical_AI_Reg**: ...
     validations:

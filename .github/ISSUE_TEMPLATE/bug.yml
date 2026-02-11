@@ -13,7 +13,7 @@ body:
       label: Affected Repository
       description: Which repository is affected?
       options:
-        - abigail (agent)
+        - orion_dock (agent)
         - SAO (orchestrator)
         - Ethical_AI_Reg (ethics layer)
         - Phoenix (coordination)
