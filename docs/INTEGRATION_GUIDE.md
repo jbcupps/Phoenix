@@ -15,6 +15,8 @@ graph LR
 
 All inter-service communication is authenticated via **Ed25519 signatures**. No service trusts another without cryptographic verification.
 
+![Agent Identity Ecosystem](Diagrams/sao-01-ecosystem-overview.png)
+
 ## Connection Models
 
 ### Abigail <-> SAO (Optional)
@@ -180,6 +182,18 @@ docker compose logs -f sao
 2. **Project tracking**: [GitHub Project board](https://github.com/users/jbcupps/projects/3) coordinates cross-repo issues
 3. **Standards enforcement**: Naming conventions, commit conventions, and security boundaries defined in [CLAUDE.md](../CLAUDE.md)
 4. **Phase gating**: Build phase transitions require all repos to meet acceptance criteria defined in the [Roadmap](ROADMAP.md)
+
+## The Trust Chain
+
+![The Trust Chain](Diagrams/sao-04-trust-chain.png)
+
+The trust chain flows from the Enterprise Identity Provider through SAO's vault and master key signing down to each agent's Ed25519 identity. Every action is traceable: Agent -> Master Key -> Admin -> IDP -> Employee.
+
+## SAO Dashboard
+
+![SAO Dashboard](Diagrams/sao-05-dashboard.png)
+
+The SAO dashboard provides real-time visibility into vault status, registered agents, stored secrets, and a full audit log of all agent and admin actions.
 
 ## Security Boundaries
 

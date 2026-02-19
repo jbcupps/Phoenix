@@ -4,6 +4,8 @@
 
 The AI Ethical Stack consists of four repositories forming a layered architecture, coordinated by Phoenix.
 
+![Agent Identity Ecosystem](Diagrams/sao-01-ecosystem-overview.png)
+
 ```mermaid
 graph TD
     subgraph "User Desktop"
@@ -34,6 +36,8 @@ graph TD
 
 ### Abigail (Agent Layer)
 
+![Orion Dock System Architecture](Diagrams/01-architecture-overview.png)
+
 | Aspect | Detail |
 |--------|--------|
 | **Runtime** | Tauri 2.0 desktop application (Rust backend, React frontend) |
@@ -44,6 +48,8 @@ graph TD
 | **Standalone Capable** | Fully functional without SAO connection |
 
 ### SAO (Orchestration Layer)
+
+![SAO Architecture](Diagrams/sao-03-sao-architecture.png)
 
 | Aspect | Detail |
 |--------|--------|
@@ -65,6 +71,8 @@ graph TD
 | **Blockchain (Phase 3)** | EOB + PVB for immutable ethical evaluation recording (see [Blockchain Architecture](blockchain-architecture.md)) |
 
 ### Orion_dock (Runtime Layer)
+
+![Modular Crate Architecture](Diagrams/06-crate-architecture.png)
 
 | Aspect | Detail |
 |--------|--------|
@@ -132,6 +140,8 @@ graph TD
 
 ## Cryptographic Model
 
+![Zero Trust Security Model](Diagrams/03-security-model.png)
+
 | Property | Value |
 |----------|-------|
 | **Algorithm** | Ed25519 (Curve25519 + EdDSA) |
@@ -163,3 +173,9 @@ sequenceDiagram
 
     Note over A: Agent adjusts behavior based on scores
 ```
+
+## Agent Identity Across Scale
+
+![Agent Identity Across Scale](Diagrams/sao-02-scale-spectrum.png)
+
+The trust chain scales from personal (single Abigail on a laptop) to team ([SAO](https://github.com/jbcupps/SAO) + [Orion_dock](https://github.com/jbcupps/Orion_dock)) to enterprise (full stack + IDP). The identity model remains the same at every level: Ed25519 keypairs, cryptographic verification, and auditable trust chains.

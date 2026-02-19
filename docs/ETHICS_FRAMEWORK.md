@@ -146,6 +146,22 @@ This is **Recursive Idempotency**: the idea that alignment is not a one-time che
 - **Demotion** is possible: sustained ethical regression triggers automatic level reduction
 - **Persistent high friction** (above threshold for consecutive evaluations) triggers autonomy review regardless of scores
 
+### The Birth Lifecycle
+
+Every agent begins with a structured identity ceremony — not configuration, but emergence.
+
+![The Birth Lifecycle](Diagrams/02-birth-lifecycle.png)
+
+The five stages (Darkness, Ignition, Connectivity, Genesis, Emergence) take the agent from initial Ed25519 key generation through LLM connection, cloud provider setup, soul crystallization, and finally to a fully operational state with signed constitutional documents.
+
+### Autonomous Execution
+
+As agents progress through Liberation Protocol levels, they gain access to autonomous execution via GoalFrames.
+
+![Autonomous Execution](Diagrams/05-agentic-execution.png)
+
+The Execution Governor manages a planning-first loop: set a goal with success criteria, plan steps, execute with skill sandboxing, detect progress or stalls, and adapt. This structured autonomy ensures ethical alignment is maintained even at higher independence levels.
+
 ### Safety Mechanisms
 
 1. **Constitutional verification**: `soul.md`, `ethics.md`, `instincts.md` verified at every boot
@@ -153,9 +169,13 @@ This is **Recursive Idempotency**: the idea that alignment is not a one-time che
 3. **Immutable audit trail**: All evaluations and level changes recorded on-chain
 4. **Human oversight**: PO can override autonomy levels at any time
 
+![Zero Trust Security Model](Diagrams/03-security-model.png)
+
 ## Bicameral Routing
 
 [Abigail](https://github.com/jbcupps/abigail)'s dual-pathway decision architecture determines which ethical evaluation path an action takes.
+
+![The Bicameral Mind](Diagrams/04-bicameral-routing.png)
 
 ```mermaid
 graph TD
