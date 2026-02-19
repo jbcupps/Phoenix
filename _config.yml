@@ -1,6 +1,6 @@
 title: "AI Ethical Stack"
 description: "Coordination hub for the AI Ethical Stack — unifying Abigail, SAO, Orion_dock & ethical alignment"
-theme: minimal
+theme: jekyll-theme-minimal
 markdown: kramdown
 plugins:
   - jekyll-seo-tag
