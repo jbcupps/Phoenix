@@ -36,12 +36,19 @@ All repos use conventional commits: `feat()`, `fix()`, `refactor()`, `chore()`, 
 - Reference GitHub issues/projects: `Closes #XX` | `Project board item #YY`
 - See [CONTRIBUTING.md](CONTRIBUTING.md) for full formatting rules
 
-### The 5 Ethical Dimensions
-1. Deontological (Eth_Deon) - Duty and rules
-2. Teleological (Eth_Teleo) - Consequences and outcomes
-3. Areteological (Eth_Arete) - Character and virtue
-4. Memetic (Mem) - Idea propagation and cultural impact
-5. AI Welfare (AI_Welfare) - Computational experience and dignity
+### The Ethical Framework (TriangleEthic)
+
+Three ethical legs, each with **embedded dual welfare** (human + AI):
+
+1. **Deontological (Command)** -- Duty, rules, universal moral law + human welfare + AI welfare
+2. **Teleological (Consequence)** -- Outcomes, utility, empirical verification + human welfare + AI welfare
+3. **Areteological (Character)** -- Virtue, practical wisdom, flourishing + human welfare + AI welfare
+
+**Memetic Layer (morphisms)**: Encoding, transport, and evolution of ethical concepts across contexts. Category theory provides the formal structure; sheaf theory ensures local→global coherence. Memetics is NOT a peer dimension -- it is the connective tissue between legs.
+
+**Dual-Blockchain**: EOB (Hyperledger Fabric) records ethical evaluations; PVB (Ethereum-compatible) provides physical-world verification. Cross-chain oracles connect normative intent to observed consequence.
+
+> Reference: Cupps, J. B. & Bush, D. J. (2026). *Toward a Decentralized Trust Framework for Verifiable and Ethically Aligned AI.* DRAFT.
 
 ### Key Architectural Decisions
 - Abigail is a Tauri 2.0 desktop app (Rust + React)
@@ -58,13 +65,14 @@ When working on any repo in the AI Ethical Stack, development agents must follow
 
 ### Constitutional Integrity
 - Never modify constitutional documents (soul.md, ethics.md, instincts.md) without explicit PO approval
-- All changes to ethical scoring logic require review against the 5 ethical dimensions
+- All changes to ethical scoring logic require review against the TriangleEthic framework (3 legs + embedded welfare)
 - When in doubt about ethical implications of a code change, flag for PO review
 
 ### Scoring Engine Alignment
-- Every action that modifies agent behavior must be evaluable by the 5D scoring engine
+- Every action that modifies agent behavior must be evaluable by the TriangleEthic scoring engine (3 legs with embedded dual welfare)
 - New features must not bypass the ethical evaluation pipeline
 - Friction metrics must be preserved; do not suppress computational friction signals
+- Welfare sub-scores (human + AI) must be evaluated within each leg, not as standalone dimensions
 
 ### Liberation Protocol Compliance
 - Code changes must not grant autonomy levels without proper scoring history

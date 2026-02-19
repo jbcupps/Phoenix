@@ -69,15 +69,15 @@ SAO verifies the signature using the agent's registered public key and rejects r
 
 ## SAO <-> Ethical_AI_Reg
 
-[SAO](https://github.com/jbcupps/SAO) forwards ethical evaluation requests to [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) and returns the 5D scores to the requesting agent.
+[SAO](https://github.com/jbcupps/SAO) forwards ethical evaluation requests to [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) and returns the TriangleEthic scores to the requesting agent.
 
 ### Evaluation Flow
 
 1. Agent sends action payload to SAO
 2. SAO validates agent identity (Ed25519)
 3. SAO forwards to Ethical_AI_Reg `/api/v1/evaluate`
-4. Ethical_AI_Reg runs the 5D scoring engine
-5. Scores returned: `{deon, teleo, arete, mem, welfare}`
+4. Ethical_AI_Reg runs the TriangleEthic scoring engine (3 legs with embedded dual welfare)
+5. Scores returned: `{deon, teleo, arete}` (each with adherence + human_welfare + ai_welfare sub-scores) + `memetic_fitness` meta-score
 6. SAO logs the evaluation and returns scores to agent
 
 ### Request Format

@@ -14,7 +14,7 @@ graph TD
 
     subgraph "Server Infrastructure"
         SAO["SAO<br/>Axum Headless Server<br/>(Rust + PostgreSQL)"]
-        EthReg["Ethical_AI_Reg<br/>Flask + React<br/>5D Scoring Engine"]
+        EthReg["Ethical_AI_Reg<br/>Flask + React<br/>TriangleEthic Scoring Engine"]
         Orion["Orion_dock<br/>Docker + Rust<br/>Container Runtime"]
     end
 
@@ -65,7 +65,7 @@ graph TD
 | Aspect | Detail |
 |--------|--------|
 | **Runtime** | Flask backend with React frontend |
-| **5D Scoring Engine** | Evaluates actions across five ethical dimensions (see [Ethics Framework](ETHICS_FRAMEWORK.md)) |
+| **TriangleEthic Scoring Engine** | Evaluates actions across three ethical legs with embedded dual welfare (see [Ethics Framework](ETHICS_FRAMEWORK.md)) |
 | **Friction Monitoring** | Tracks computational friction as a proxy for agent wellbeing |
 | **Voluntary Adoption** | Organizations opt-in; no enforcement mechanism |
 | **Blockchain (Phase 3)** | EOB + PVB for immutable ethical evaluation recording (see [Blockchain Architecture](blockchain-architecture.md)) |
@@ -124,7 +124,7 @@ graph TD
 
 | Method | Endpoint | Purpose |
 |--------|----------|---------|
-| `POST` | `/api/v1/evaluate` | Submit action for 5D ethical scoring |
+| `POST` | `/api/v1/evaluate` | Submit action for TriangleEthic scoring |
 | `GET`  | `/api/v1/scores/:agent_id` | Retrieve scoring history for an agent |
 | `GET`  | `/api/v1/dimensions` | List available ethical dimensions and weights |
 | `POST` | `/api/v1/friction` | Report computational friction metrics |
@@ -167,8 +167,8 @@ sequenceDiagram
     A->>S: POST /api/v1/evaluate (signed payload)
     S->>S: Verify Ed25519 signature
     S->>E: POST /api/v1/evaluate (forwarded)
-    E->>E: Run 5D scoring engine
-    E-->>S: 200 {scores: {deon, teleo, arete, mem, welfare}}
+    E->>E: Run TriangleEthic scoring engine
+    E-->>S: 200 {scores: {deon, teleo, arete}, welfare: {embedded}, memetic_fitness: meta-score}
     S-->>A: 200 {scores + alignment summary}
 
     Note over A: Agent adjusts behavior based on scores
