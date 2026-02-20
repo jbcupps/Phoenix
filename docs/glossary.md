@@ -88,11 +88,37 @@ The set of foundational markdown files that define an agent's core identity and 
 
 These documents are cryptographically signed with the agent's Ed25519 key and verified at every boot to ensure they have not been tampered with.
 
-## Id / Ego
+## Id / Ego / Superego (The Freudian Triad)
 
-The two decision-making subsystems within Abigail's bicameral architecture:
-- **Id**: The instinctive layer -- fast pattern matching, emotional intelligence, intuitive responses. Named after the Freudian concept but implemented as a practical routing mechanism.
-- **Ego**: The reflective layer -- deliberate reasoning, ethical evaluation, long-term consequence analysis. Engages when the situation demands careful thought.
+The three-layer decision and oversight architecture within the AI Ethical Stack, inspired by Freudian psychodynamic theory:
+
+- **Id (Soul)**: The instinctive, foundational layer -- fast pattern matching, emotional intelligence, intuitive responses. Grounded in the immutable constitutional documents (`soul.md`, `ethics.md`, `instincts.md`). Implemented as the fast tier in bicameral routing.
+- **Ego**: The reflective layer -- deliberate reasoning, ethical evaluation, long-term consequence analysis. Implemented as the standard and pro council tiers in bicameral routing. Engages when the situation demands careful thought.
+- **Superego**: The oversight layer -- periodic monitoring of ego conversations, generating safe and auditable tweak proposals applied exclusively to `personality.md`. Operates at a higher temporal scale (1 h / 24 h / 7 d roll-ups) to refine character over time without touching immutable constitutional documents.
+
+> *Soul is who you are. Ego is how you think. Superego is how you grow.*
+
+## Superego Layer
+
+A runtime character-refinement mechanism that periodically reviews ego conversation logs and proposes behavioral adjustments to `personality.md`. The Superego completes the Freudian-inspired triad (Soul/Id → Ego → Superego).
+
+**Key invariant**: `soul.md` is read-only for all time. Superego has zero access to `soul.md`, `ethics.md` core commitments, or the Ed25519 birth signature. All refinement flows through `personality.md`, approved and re-signed by SAO.
+
+**Monitoring modes**:
+- **Periodic**: Roll-up summaries at 1 h / 24 h / 7 d intervals (standard agents)
+- **Persistent**: Continuous streaming for high-criticality agents in Orion_dock high-stakes hives
+
+Ego logs are streamed to Ethical_AI_Reg for TriangleEthic scoring + memetic fitness. All actions are logged to the dual-blockchain (EOB/PVB).
+
+## personality.md
+
+A **mutable** character document that captures an agent's learned behavioral preferences, stylistic adjustments, and personality traits refined over time by the Superego layer. Unlike the immutable constitutional documents (`soul.md`, `ethics.md`, `instincts.md`), `personality.md` is designed to evolve through safe, auditable tweaks.
+
+Every modification to `personality.md` must be:
+1. Proposed by the Superego based on ego conversation analysis
+2. Evaluated by Ethical_AI_Reg for TriangleEthic compliance
+3. Approved and re-signed by SAO
+4. Logged to the dual-blockchain (EOB/PVB)
 
 ## Birth Flow
 

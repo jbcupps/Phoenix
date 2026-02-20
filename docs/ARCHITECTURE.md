@@ -165,6 +165,37 @@ graph TD
 | **Project Tracking** | [GitHub Project board](https://github.com/users/jbcupps/projects/4) for cross-repo issue coordination |
 | **Standards** | Defines naming conventions, commit conventions, and security boundaries |
 
+### Superego (Character-Refinement Layer)
+
+The Superego completes the Freudian-inspired triad (**Soul/Id** → **Ego** → **Superego**) by providing periodic, auditable oversight of agent character without modifying immutable constitutional documents.
+
+```mermaid
+graph TD
+    Soul["Soul (Id)<br/>soul.md · ethics.md · instincts.md<br/>Immutable · Ed25519-signed"]
+    Ego["Ego<br/>Bicameral Router<br/>Fast / Standard / Pro Council"]
+    Superego["Superego<br/>Periodic Oversight<br/>1h · 24h · 7d roll-ups"]
+    Personality["personality.md<br/>Mutable character tweaks<br/>Re-signed by SAO"]
+    EthReg["Ethical_AI_Reg<br/>TriangleEthic Scoring<br/>+ Memetic Fitness"]
+    Chain["Dual-Blockchain<br/>EOB / PVB"]
+
+    Soul -->|"read-only foundation"| Ego
+    Ego -->|"conversation logs"| Superego
+    Superego -->|"tweak proposals"| Personality
+    Superego -->|"ego log stream"| EthReg
+    EthReg -->|"scoring + fitness"| Superego
+    Superego -->|"audit trail"| Chain
+```
+
+| Aspect | Detail |
+|--------|--------|
+| **Role** | Runtime character refinement via periodic ego conversation monitoring |
+| **Key Invariant** | `soul.md` is read-only for all time; Superego has zero access to `soul.md`, `ethics.md` core commitments, or the Ed25519 birth signature |
+| **Monitoring Cadence** | Roll-up summaries every 1 h / 24 h / 7 d; optional persistent monitoring for high-criticality agents ([Orion_dock](https://github.com/jbcupps/Orion_dock) high-stakes hives) |
+| **Output** | Safe, auditable tweak proposals applied exclusively to `personality.md` |
+| **Scoring** | Ego logs streamed to [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) for TriangleEthic scoring + memetic fitness evaluation |
+| **Signing** | Approved tweaks re-signed by [SAO](https://github.com/jbcupps/SAO) before application |
+| **Audit** | All actions logged to the dual-blockchain (EOB/PVB) and Phoenix project board (Phase 3+ milestones) |
+
 ## Interface Contracts
 
 ### Abigail <-> SAO

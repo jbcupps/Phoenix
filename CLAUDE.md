@@ -8,7 +8,8 @@ Phoenix coordinates the AI Ethical Stack: [abigail](https://github.com/jbcupps/a
 ### Security Boundaries
 - API keys NEVER leave the agent's SecretsVault in plaintext
 - All inter-service communication uses Ed25519 signature verification
-- Constitutional documents (soul.md, ethics.md, instincts.md) are cryptographically signed and verified at boot
+- Constitutional documents (soul.md, ethics.md, instincts.md) are cryptographically signed and verified at boot; these are **immutable** for all time
+- personality.md is the sole mutable character document; modifications require Superego proposal + SAO approval + re-signing
 - SAO verifies agent identity before accepting connections
 - Replay protection: signed requests must include timestamps; reject if > 5 minutes old
 
@@ -23,7 +24,8 @@ Phoenix coordinates the AI Ethical Stack: [abigail](https://github.com/jbcupps/a
 - Rust crates: `abigail-*` for agent, `sao-*` for orchestrator
 - Python modules: snake_case
 - API endpoints: `/api/v1/` prefix
-- Constitutional docs: lowercase markdown (soul.md, ethics.md, instincts.md)
+- Constitutional docs: lowercase markdown (soul.md, ethics.md, instincts.md) -- immutable
+- Character doc: personality.md -- mutable via Superego + SAO approval
 - Docker services: lowercase, hyphenated (e.g., `ethical-ai-reg`, `sao-server`)
 
 ### Commit Convention
@@ -46,6 +48,8 @@ Three ethical legs, each with **embedded dual welfare** (human + AI):
 
 **Memetic Layer (morphisms)**: Encoding, transport, and evolution of ethical concepts across contexts. Category theory provides the formal structure; sheaf theory ensures local→global coherence. Memetics is NOT a peer dimension -- it is the connective tissue between legs.
 
+**Superego Layer**: Periodic ego oversight (1 h / 24 h / 7 d roll-ups) generating safe, auditable tweak proposals applied exclusively to personality.md. soul.md is read-only for all time. Completes the Freudian triad: Soul/Id → Ego → Superego.
+
 **Dual-Blockchain**: EOB (Hyperledger Fabric) records ethical evaluations; PVB (Ethereum-compatible) provides physical-world verification. Cross-chain oracles connect normative intent to observed consequence.
 
 > Reference: Cupps, J. B. & Bush, D. J. (2026). *Toward a Decentralized Trust Framework for Verifiable and Ethically Aligned AI.* DRAFT.
@@ -65,6 +69,8 @@ When working on any repo in the AI Ethical Stack, development agents must follow
 
 ### Constitutional Integrity
 - Never modify constitutional documents (soul.md, ethics.md, instincts.md) without explicit PO approval
+- soul.md is **immutable for all time** -- the Superego layer has zero access to it
+- personality.md is the only agent document modifiable at runtime, and only via Superego proposal → Ethical_AI_Reg scoring → SAO approval + re-signing
 - All changes to ethical scoring logic require review against the TriangleEthic framework (3 legs + embedded welfare)
 - When in doubt about ethical implications of a code change, flag for PO review
 
@@ -77,7 +83,8 @@ When working on any repo in the AI Ethical Stack, development agents must follow
 ### Liberation Protocol Compliance
 - Code changes must not grant autonomy levels without proper scoring history
 - Level transitions must be recorded immutably (Phase 3+)
-- Safety mechanisms (constitutional verification, friction monitoring) must never be weakened
+- Safety mechanisms (constitutional verification, friction monitoring, Superego oversight) must never be weakened
+- Superego monitoring data feeds into Liberation Protocol level assessments; do not bypass this pipeline
 
 ### Cross-Repo Consistency
 - Architecture changes in one repo must be reflected in Phoenix documentation

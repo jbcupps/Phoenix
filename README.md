@@ -152,6 +152,42 @@ graph TD
     Synth --> Response
 ```
 
+### Superego Layer -- Periodic Ego Oversight
+
+**Purpose**
+Superego provides runtime character refinement without ever touching the immutable `soul.md`. It performs:
+
+- Periodic monitoring of ego conversations (roll-up summaries every 1 h / 24 h / 7 d)
+- Optional persistent monitoring for high-criticality agents ([Orion_dock](https://github.com/jbcupps/Orion_dock) high-stakes hives)
+- Generation of safe, auditable tweak proposals that are applied exclusively to **`personality.md`**
+
+**Key Invariant**
+`soul.md` is read-only for all time. Superego has zero access to `soul.md`, `ethics.md` core commitments, or the Ed25519 birth signature.
+
+**Integration**
+- Ego logs are streamed to [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) for TriangleEthic scoring + memetic fitness.
+- Approved tweaks are written back to the agent's `personality.md` and re-signed by [SAO](https://github.com/jbcupps/SAO).
+- All actions are logged to the Phoenix project board (Phase 3+ milestones) and the dual-blockchain (EOB/PVB).
+
+This completes the Freudian-inspired triad (**Soul/Id** → **Ego** → **Superego**) while preserving decentralized trust and Liberation Protocol progression.
+
+```mermaid
+graph TD
+    Soul["Soul (Id)<br/>soul.md · ethics.md · instincts.md<br/>Immutable · Ed25519-signed"]
+    Ego["Ego<br/>Bicameral Router<br/>Fast / Standard / Pro Council"]
+    Superego["Superego<br/>Periodic Oversight<br/>1h · 24h · 7d roll-ups"]
+    Personality["personality.md<br/>Mutable character tweaks<br/>Re-signed by SAO"]
+    EthReg["Ethical_AI_Reg<br/>TriangleEthic Scoring<br/>+ Memetic Fitness"]
+    Chain["Dual-Blockchain<br/>EOB / PVB"]
+
+    Soul -->|"read-only foundation"| Ego
+    Ego -->|"conversation logs"| Superego
+    Superego -->|"tweak proposals"| Personality
+    Superego -->|"ego log stream"| EthReg
+    EthReg -->|"scoring + fitness"| Superego
+    Superego -->|"audit trail"| Chain
+```
+
 ## Theoretical Foundation
 
 - **TriangleEthic**: Three ethical legs -- Deontological (Command), Areteological (Character), Teleological (Consequence) -- each with **embedded dual welfare** (human + AI). Connected by a **memetic morphism layer** grounded in category theory and sheaf theory.

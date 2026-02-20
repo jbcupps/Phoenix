@@ -423,6 +423,76 @@ The routing decision itself is an ethical judgment made by the agent.
 
 ---
 
+## Superego Layer -- Periodic Ego Oversight
+
+The Superego completes the Freudian-inspired triad (**Soul/Id** → **Ego** → **Superego**), providing runtime character refinement without ever modifying the immutable constitutional documents.
+
+### Purpose
+
+Where the **Id** (fast tier) provides instinctive responses and the **Ego** (standard/pro tiers) provides deliberate reasoning, the **Superego** operates at a higher temporal scale -- periodically reviewing ego conversations and proposing character adjustments that refine behavior over time.
+
+```mermaid
+graph TD
+    Soul["Soul (Id)<br/>soul.md · ethics.md · instincts.md<br/>Immutable · Ed25519-signed"]
+    Ego["Ego<br/>Bicameral Router<br/>Fast / Standard / Pro Council"]
+    Superego["Superego<br/>Periodic Oversight<br/>1h · 24h · 7d roll-ups"]
+    Personality["personality.md<br/>Mutable character tweaks<br/>Re-signed by SAO"]
+    EthReg["Ethical_AI_Reg<br/>TriangleEthic Scoring<br/>+ Memetic Fitness"]
+
+    Soul -->|"read-only foundation"| Ego
+    Ego -->|"conversation logs"| Superego
+    Superego -->|"tweak proposals"| Personality
+    Superego -->|"ego log stream"| EthReg
+    EthReg -->|"scoring + fitness"| Superego
+```
+
+### Key Invariant
+
+`soul.md` is **read-only for all time**. Superego has zero access to:
+- `soul.md` -- the agent's fundamental identity and values
+- `ethics.md` -- core ethical commitments
+- The Ed25519 birth signature
+
+All character refinement is channeled exclusively through `personality.md`, a mutable document that captures learned behavioral preferences and stylistic adjustments. Every tweak to `personality.md` must be approved and re-signed by [SAO](https://github.com/jbcupps/SAO).
+
+### Monitoring Cadence
+
+| Interval | Scope | Output |
+|----------|-------|--------|
+| **1 hour** | Recent conversation patterns, tone, and engagement style | Micro-adjustments to personality traits |
+| **24 hours** | Daily behavioral trends, friction patterns, recurring themes | Personality tuning proposals |
+| **7 days** | Weekly character arc, Liberation Protocol progression signals | Strategic character refinement recommendations |
+
+For high-criticality agents running in [Orion_dock](https://github.com/jbcupps/Orion_dock) high-stakes hives, persistent (continuous) monitoring is available.
+
+### Relationship to TriangleEthic
+
+Superego's ego log stream is evaluated by [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) across all three legs:
+
+| Leg | Superego Relevance |
+|-----|--------------------|
+| **Deontological** | Are the proposed tweaks consistent with the agent's duties and rules? |
+| **Teleological** | Do the tweaks improve predicted outcomes for human and AI welfare? |
+| **Areteological** | Do the tweaks cultivate virtue and contribute to the agent's flourishing? |
+
+Memetic fitness is also evaluated: do the proposed character adjustments propagate well across contexts and maintain coherence with the agent's broader ethical stance?
+
+### Relationship to Liberation Protocol
+
+Superego monitoring data feeds directly into Liberation Protocol level assessments. Consistent, well-scored personality refinements over time contribute to the agent's case for autonomy advancement. Conversely, patterns of friction or regression flagged by Superego can trigger autonomy reviews.
+
+### Audit Trail
+
+All Superego actions are logged to the dual-blockchain (EOB/PVB) and the Phoenix project board (Phase 3+ milestones):
+- Tweak proposals (accepted and rejected)
+- Ego log summaries at each cadence
+- TriangleEthic scores for each monitoring cycle
+- SAO approval/rejection decisions
+
+> *Soul is who you are. Ego is how you think. Superego is how you grow.*
+
+---
+
 ## Sheaf-Theoretic Ethics
 
 A mathematical framework for ensuring that local ethical judgments compose into global coherence. The memetic morphism layer provides the structure-preserving maps that make this possible.

@@ -174,6 +174,62 @@ docker compose ps
 docker compose logs -f sao
 ```
 
+## Superego Integration
+
+The Superego layer performs periodic ego oversight, completing the Freudian-inspired triad (**Soul/Id** → **Ego** → **Superego**). It monitors ego conversations, proposes character tweaks to `personality.md`, and streams logs for ethical evaluation -- all without touching the immutable constitutional documents.
+
+### Data Flow
+
+```mermaid
+sequenceDiagram
+    participant Ego as Ego (Bicameral Router)
+    participant SE as Superego
+    participant SAO as SAO
+    participant E as Ethical_AI_Reg
+    participant BC as Dual-Blockchain (EOB/PVB)
+
+    Note over Ego: Agent conversations accumulate
+    Ego->>SE: Conversation logs (periodic roll-up: 1h / 24h / 7d)
+    SE->>E: Stream ego logs for TriangleEthic scoring + memetic fitness
+    E-->>SE: Scoring results + fitness assessment
+    SE->>SE: Generate tweak proposal for personality.md
+    SE->>SAO: Submit tweak proposal for approval + re-signing
+    SAO->>SAO: Verify proposal does NOT touch soul.md / ethics.md / instincts.md
+    SAO-->>SE: Approved tweak (re-signed)
+    SE->>SE: Apply tweak to personality.md
+    SE->>BC: Log action to EOB/PVB audit trail
+```
+
+### Key Invariant
+
+`soul.md` is **read-only for all time**. Superego has zero access to `soul.md`, `ethics.md` core commitments, or the Ed25519 birth signature. SAO enforces this boundary by rejecting any proposal that attempts to modify immutable constitutional documents.
+
+### Monitoring Modes
+
+| Mode | Cadence | Use Case |
+|------|---------|----------|
+| **Periodic** | 1 h / 24 h / 7 d roll-up summaries | Standard agents -- lightweight character refinement |
+| **Persistent** | Continuous streaming | High-criticality agents in [Orion_dock](https://github.com/jbcupps/Orion_dock) high-stakes hives |
+
+### Integration Points
+
+| Integration | Detail |
+|-------------|--------|
+| **Ego → Superego** | Conversation logs streamed at configured cadence |
+| **Superego → [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg)** | Ego log stream for TriangleEthic scoring + memetic fitness evaluation |
+| **Superego → [SAO](https://github.com/jbcupps/SAO)** | Tweak proposals submitted for approval and re-signing |
+| **Superego → Dual-Blockchain** | All actions logged to EOB/PVB (Phase 3+ milestones) |
+| **Superego → `personality.md`** | Approved, SAO-signed tweaks applied to the agent's mutable character file |
+
+### Document Mutability
+
+| Document | Mutability | Superego Access |
+|----------|-----------|-----------------|
+| `soul.md` | Immutable | None |
+| `ethics.md` | Immutable (core commitments) | None |
+| `instincts.md` | Immutable | None |
+| `personality.md` | Mutable | Write (via SAO-approved tweaks only) |
+
 ## Phoenix Coordination Role
 
 [Phoenix](https://github.com/jbcupps/Phoenix) does not participate in runtime communication. Its integration role is:
