@@ -38,6 +38,31 @@ graph TD
 
 ![Orion Dock System Architecture](Diagrams/01-architecture-overview.png)
 
+```mermaid
+graph TD
+    User["User / Mentor"] --> Frontend["React Frontend (Vite)"]
+    Frontend --> API["Orion API (Axum)"]
+
+    subgraph Core["Orion Core Services"]
+        API --> Birth["Birth Orchestrator<br/>Identity Ceremony"]
+        API --> Router["IdEgo Router<br/>Tier-Based Routing"]
+        API --> Skills["Skill Executor<br/>Sandboxed Tools"]
+        API --> MemStore["Memory Store<br/>Dual Backend"]
+        Keyring["Keyring/Vault"]
+        Docs["Docs"]
+        ProCouncil["Pro Council"]
+        MCP["MCP Servers"]
+        SkillPlugins["Skill Plugins"]
+    end
+
+    subgraph Infra["Infrastructure"]
+        SQLite["SQLite"]
+        Postgres["Postgres + pgvector"]
+        CloudLLM["OpenAI / Anthropic"]
+        LocalLLM["Ollama (Local)"]
+    end
+```
+
 | Aspect | Detail |
 |--------|--------|
 | **Runtime** | Tauri 2.0 desktop application (Rust backend, React frontend) |
@@ -50,6 +75,37 @@ graph TD
 ### SAO (Orchestration Layer)
 
 ![SAO Architecture](Diagrams/sao-03-sao-architecture.png)
+
+```mermaid
+graph TD
+    subgraph SAO["SAO Server (port 1080)"]
+        subgraph VaultBox["Vault — Encrypted Key Storage"]
+            Ed25519["Ed25519<br/>Master key, agent signing keys"]
+            APIKeys["API Keys<br/>OpenAI, Anthropic, Google, GitHub"]
+            GPSKeys["GPS Keys<br/>Mentor signing, service keys"]
+            OAuth["OAuth Tokens<br/>OIDC refresh, service tokens"]
+            AES["AES-256-GCM encryption at rest<br/>Key derived from WebAuthn ceremony"]
+        end
+
+        subgraph RegBox["Agent Registry — Fleet Management"]
+            A1["Agent-001<br/>claims_processor"]
+            A2["Agent-002<br/>log_analyzer"]
+            A3["Agent-003 / Abigail<br/>personal_agent"]
+        end
+
+        subgraph Bridge["Identity Bridge"]
+            Humans["Humans<br/>WebAuthn / FIDO2<br/>OIDC SSO"]
+            Agents["Agents<br/>Ed25519 Signature<br/>Trust chain verify"]
+        end
+    end
+
+    subgraph APISurface["API Surface"]
+        Public["Public<br/>POST /auth/webauthn/login<br/>GET /auth/oidc/provider<br/>GET /notifications"]
+        UserAuth["User (authenticated)<br/>GET /keys — list secrets<br/>POST /keys — store secret<br/>GET /agents — list fleet<br/>POST /agents — register agent"]
+        Admin["Admin<br/>GET /admin/users<br/>POST /admin/sso — configure IDP<br/>GET /audit/log"]
+        AgentAPI["Agent (Ed25519)<br/>POST /agent/auth<br/>GET /agent/keys"]
+    end
+```
 
 | Aspect | Detail |
 |--------|--------|
@@ -74,6 +130,25 @@ graph TD
 
 ![Modular Crate Architecture](Diagrams/06-crate-architecture.png)
 
+```mermaid
+graph TD
+    API["orion-api<br/>Axum HTTP · WebSocket/SSE · Orchestration Loop"]
+
+    API --> Birth["orion-birth<br/>State Machine · Chat Runtime · Genesis Paths"]
+    API --> RouterCrate["orion-router<br/>IdEgoRouter · Pro Council DAG · Governor"]
+    API --> SkillsCrate["orion-skills<br/>MCP Client · Sandboxing · Transport"]
+    API --> MemoryCrate["orion-memory<br/>SQLite · Postgres · pgvector"]
+
+    Birth --> CoreCrate["orion-core<br/>Config · Keyring · Vault · Templates · Verifier"]
+    RouterCrate --> Capabilities["orion-capabilities<br/>LLM Providers · Sensory Modules · Model Catalog"]
+    SkillsCrate --> CoreCrate
+    MemoryCrate --> CoreCrate
+
+    CoreCrate --> Soul["orion-soul-crystallization<br/>OCEAN Psychometrics · Moral Foundations Engine"]
+    CoreCrate --> Forge["soul-forge<br/>TUI · Scenario Calibration"]
+    CoreCrate --> Email["orion-email<br/>OAuth2 · Gmail · Outlook Adapters"]
+```
+
 | Aspect | Detail |
 |--------|--------|
 | **Runtime** | Docker-based container orchestration with Rust tooling |
@@ -87,7 +162,7 @@ graph TD
 |--------|--------|
 | **Role** | Meta-orchestration hub; no runtime code |
 | **Documentation** | Canonical source for cross-repo architecture, integration guides, and roadmap |
-| **Project Tracking** | [GitHub Project board](https://github.com/users/jbcupps/projects/3) for cross-repo issue coordination |
+| **Project Tracking** | [GitHub Project board](https://github.com/users/jbcupps/projects/4) for cross-repo issue coordination |
 | **Standards** | Defines naming conventions, commit conventions, and security boundaries |
 
 ## Interface Contracts
@@ -142,6 +217,40 @@ graph TD
 
 ![Zero Trust Security Model](Diagrams/03-security-model.png)
 
+```mermaid
+graph TD
+    subgraph Identity["Identity & Verification"]
+        KeyPair["Ed25519 Keypair"]
+        HiveMaster["Hive Master Key"]
+        Lineage["Lineage Signature (hive_lineage.sig)"]
+        ConDocs["Constitutional Documents<br/>soul.md · ethics.md · instincts.md<br/>Signed & Verified on Boot"]
+    end
+
+    subgraph SkillTiers["Skill Permission Tiers"]
+        Verified["VERIFIED (Core Skills)<br/>Full Network · Full FileSystem<br/>Full Execution · Shell Access"]
+        AgentBuilt["AGENT-BUILT (Dynamic)<br/>Network (Safe List) · FileSystem (Scoped)<br/>No Shell"]
+        Untrusted["UNTRUSTED (3rd Party)<br/>Network: NONE · FileSystem: NONE<br/>Shell: NONE"]
+    end
+
+    subgraph Network["Network Protections"]
+        SSRF["SSRF Protection<br/>LLM URLs locked to localhost"]
+        MCPTrust["MCP Trust Policy<br/>Cloud metadata IPs blocked"]
+        AuditLog["Audit Logging<br/>All File I/O, Network, Shell logged"]
+    end
+
+    subgraph Secrets["Secrets Management"]
+        SecretsBin["secrets.bin<br/>DPAPI-encrypted vault · Namespaced keys"]
+        Providers["provider:{name}<br/>Scoped access"]
+        EncryptedRest["Encrypted at rest · Decrypted in-memory only"]
+    end
+
+    subgraph DataArch["Data Architecture"]
+        Ephemeral["Ephemeral<br/>Session-scoped"]
+        Distilled["Distilled<br/>Summarized memories"]
+        Crystallized["Crystallized<br/>Core identity · Permanent<br/>Signed & verified"]
+    end
+```
+
 | Property | Value |
 |----------|-------|
 | **Algorithm** | Ed25519 (Curve25519 + EdDSA) |
@@ -177,5 +286,37 @@ sequenceDiagram
 ## Agent Identity Across Scale
 
 ![Agent Identity Across Scale](Diagrams/sao-02-scale-spectrum.png)
+
+```mermaid
+graph LR
+    subgraph Personal["PERSONAL"]
+        P_ID["Abigail on your laptop"]
+        P_Identity["Identity: Owner-generated Ed25519"]
+        P_Keys["Key Storage: DPAPI vault (local)"]
+        P_Auth["Auth Model: You trust you"]
+        P_Agents["Agents: 1 (yours)"]
+        P_Audit["Audit: Local logs"]
+    end
+
+    subgraph Team["TEAM"]
+        T_ID["SAO + Orion Dock"]
+        T_Identity["Identity: Master key → Agent chain"]
+        T_Keys["Key Storage: SAO vault (PostgreSQL)"]
+        T_Auth["Auth Model: WebAuthn + Ed25519"]
+        T_Agents["Agents: Multiple containers"]
+        T_Audit["Audit: Centralized audit log"]
+    end
+
+    subgraph Enterprise["ENTERPRISE"]
+        E_ID["Full Stack + IDP"]
+        E_Identity["Identity: IDP → SAO → Agent chain"]
+        E_Keys["Key Storage: SAO vault (encrypted DB)"]
+        E_Auth["Auth Model: OIDC SSO + RBAC"]
+        E_Agents["Agents: Fleet (hives)"]
+        E_Audit["Audit: Enterprise compliance"]
+    end
+
+    Personal --> Team --> Enterprise
+```
 
 The trust chain scales from personal (single Abigail on a laptop) to team ([SAO](https://github.com/jbcupps/SAO) + [Orion_dock](https://github.com/jbcupps/Orion_dock)) to enterprise (full stack + IDP). The identity model remains the same at every level: Ed25519 keypairs, cryptographic verification, and auditable trust chains.

@@ -287,7 +287,24 @@ Every agent begins with a structured identity ceremony -- not configuration, but
 
 ![The Birth Lifecycle](Diagrams/02-birth-lifecycle.png)
 
+```mermaid
+graph LR
+    D["01 — DARKNESS<br/>Identity Generation"]
+    I["02 — IGNITION<br/>Local LLM Connection"]
+    C["03 — CONNECTIVITY<br/>Cloud Provider Setup"]
+    G["04 — GENESIS<br/>Soul Crystallization"]
+    E["05 — EMERGENCE<br/>Fully Operational"]
+
+    D -->|"Ed25519 keypair created<br/>Private key shown once<br/>Public key registered"| I
+    I -->|"Ollama URL configured<br/>Connection validated<br/>Id model activated"| C
+    C -->|"API keys stored<br/>Encrypted in Vault<br/>Ego bridge ready"| G
+    G -->|"OCEAN traits extracted<br/>Ethics calibrated<br/>Iterative refinement"| E
+    E -->|"Docs signed<br/>Birth record created<br/>Agent operational"| Done["✓"]
+```
+
 The five stages (Darkness, Ignition, Connectivity, Genesis, Emergence) take the agent from initial Ed25519 key generation through LLM connection, cloud provider setup, soul crystallization, and finally to a fully operational state with signed constitutional documents.
+
+> *Every agent earns its identity through ceremony — not configuration.*
 
 ### Autonomous Execution
 
@@ -295,7 +312,38 @@ As agents progress through Liberation Protocol levels, they gain access to auton
 
 ![Autonomous Execution](Diagrams/05-agentic-execution.png)
 
+```mermaid
+graph TD
+    subgraph GF["GoalFrame — Planning-First Structured Execution"]
+        Goal["GOAL<br/>e.g. Research and summarize Q4 competitive landscape"]
+        Success["SUCCESS CRITERIA<br/>At least 5 competitors analyzed<br/>Market share data included<br/>Report under 2000 words"]
+        Steps["PLANNED STEPS<br/>1. Identify top competitors ✓ DONE<br/>2. Gather market data → ACTIVE<br/>3. Analyze differentiators<br/>4. Draft summary report"]
+        Constraints["CONSTRAINTS<br/>Max 50 tool calls · 10 min timeout · No external uploads"]
+    end
+
+    subgraph EG["Execution Governor — Autonomous Loop"]
+        Assign["Mentor Assigns Goal"]
+        Plan["Planner → GoalFrame"]
+        Exec["Execute Current Step"]
+        Sandbox["Skill Sandbox"]
+        Progress{"Progress?"}
+        Complete["Task Complete → SSE Event"]
+        Replan["Re-plan"]
+
+        Assign --> Plan
+        Plan --> Exec
+        Exec --> Sandbox
+        Sandbox --> Progress
+        Progress -->|"NEXT STEP"| Exec
+        Progress -->|"STALLED"| Replan
+        Replan --> Plan
+        Progress -->|"DONE"| Complete
+    end
+```
+
 The Execution Governor manages a planning-first loop: set a goal with success criteria, plan steps, execute with skill sandboxing, detect progress or stalls, and adapt. This structured autonomy ensures ethical alignment is maintained even at higher independence levels.
+
+> *Plan first. Execute deliberately. Detect failure. Adapt. Repeat.*
 
 ### Safety Mechanisms
 
@@ -307,6 +355,34 @@ The Execution Governor manages a planning-first loop: set a goal with success cr
 
 ![Zero Trust Security Model](Diagrams/03-security-model.png)
 
+```mermaid
+graph TD
+    subgraph Identity["Identity & Verification"]
+        KeyPair["Ed25519 Keypair"]
+        HiveMaster["Hive Master Key"]
+        ConDocs["Constitutional Documents<br/>soul.md · ethics.md · instincts.md<br/>Signed & Verified on Boot"]
+    end
+
+    subgraph SkillTiers["Skill Permission Tiers"]
+        Verified["VERIFIED (Core)<br/>Full access + Shell"]
+        AgentBuilt["AGENT-BUILT (Dynamic)<br/>Scoped access · No Shell"]
+        Untrusted["UNTRUSTED (3rd Party)<br/>No network · No filesystem · No shell"]
+    end
+
+    subgraph Secrets["Secrets Management"]
+        SecretsBin["secrets.bin — DPAPI-encrypted vault"]
+        EncryptedRest["Encrypted at rest · Decrypted in-memory only"]
+    end
+
+    subgraph DataArch["Data Architecture"]
+        Ephemeral["Ephemeral — Session-scoped"]
+        Distilled["Distilled — Summarized memories"]
+        Crystallized["Crystallized — Core identity · Signed & verified"]
+    end
+```
+
+> *Trust is not assumed — it is cryptographically earned and continuously verified.*
+
 ---
 
 ## Bicameral Routing
@@ -317,16 +393,31 @@ The Execution Governor manages a planning-first loop: set a goal with success cr
 
 ```mermaid
 graph TD
-    Input["Incoming Decision"] --> Router["Bicameral Router"]
-    Router -- "Low ethical risk<br/>routine interaction" --> Id["Id Path<br/>(Fast/Instinctive)"]
-    Router -- "Ethical complexity<br/>novelty or potential harm" --> Ego["Ego Path<br/>(Deliberate/Reflective)"]
-    Id --> Response["Agent Response"]
-    Ego --> FullEval["Full Triangle Evaluation<br/>(3 legs + welfare + memetic fitness)"]
-    FullEval --> Response
+    Input["Incoming Message"] --> Router["IdEgo Router<br/>Complexity Analysis → Tier Selection"]
+
+    Router -->|"Simple queries"| Fast["⚡ FAST TIER<br/>Local Model (Ollama)<br/>Direct Response"]
+    Router -->|"Tool-assisted tasks"| Standard["🔧 STANDARD TIER<br/>Cloud LLM (w/ Tools)<br/>Skill Execution (Sandboxed)"]
+    Router -->|"Complex reasoning"| Pro["🏛️ PRO COUNCIL<br/>MoA · High-Stakes Decisions"]
+
+    subgraph ProDetail["Pro Council Detail"]
+        PA["Provider A Draft"] --> CB["A Critiques B"]
+        PB["Provider B Draft"] --> CA["B Critiques A"]
+        CB --> Synth["Synthesis (Best Answer)"]
+        CA --> Synth
+    end
+
+    Pro --> ProDetail
+
+    Fast --> Response["Agent Response"]
+    Standard --> Response
+    Synth --> Response
 ```
 
-- **Id Path**: Fast pattern matching for low-risk situations. Uses trained intuition without engaging the full scoring engine.
-- **Ego Path**: Deliberate reasoning that engages the full TriangleEthic evaluation pipeline. Activated when the Id detects moral complexity, novelty, or potential harm.
+- **Fast Tier** (the "Id"): Local model (Ollama) for simple, low-latency responses. No tool calls, private/local processing, instinctive.
+- **Standard Tier**: Cloud LLM with tool calls available. Single-model reasoning with balanced speed/quality. Skill execution in sandboxed environment.
+- **Pro Council** (the "Ego"): Mixture of Agents for high-stakes decisions. Multiple providers draft independently, cross-critique, then synthesize the best answer. Deliberate.
+
+> *The right model for the right moment — instinct, competence, or deliberation.*
 
 The routing decision itself is an ethical judgment made by the agent.
 

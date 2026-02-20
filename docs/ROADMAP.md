@@ -58,7 +58,7 @@ Phase 5                                              █████████
 - [x] Conventional commit standard established across all repos
 - [x] Ed25519 security boundaries defined
 - [x] GitHub Project board linked from all repo READMEs
-- [x] 5 ethical dimensions formally defined
+- [x] TriangleEthic framework (3 legs + embedded dual welfare) formally defined
 
 ---
 
@@ -73,13 +73,13 @@ Phase 5                                              █████████
 |-------------|------|-------------|
 | TriangleEthic scoring API | [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) | REST endpoint `POST /api/v1/evaluate` accepting action payloads and returning per-leg scores with embedded welfare |
 | Dimension weight configuration | [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) | Configurable weights for each ethical dimension |
-| Scoring test suite | [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) | Unit and integration tests for all 5 dimensions |
+| Scoring test suite | [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) | Unit and integration tests for all 3 legs with embedded welfare |
 | Friction calculation | [Ethical_AI_Reg](https://github.com/jbcupps/Ethical_AI_Reg) | Computational friction metric derived from scoring conflicts |
 | API documentation | [Phoenix](https://github.com/jbcupps/Phoenix) | Interface contract for scoring endpoints |
 
 ### Acceptance Criteria
 
-- [ ] `POST /api/v1/evaluate` returns scores for all 5 dimensions (deon, teleo, arete, mem, welfare)
+- [ ] `POST /api/v1/evaluate` returns scores for 3 legs (deon, teleo, arete) with embedded welfare sub-scores + memetic fitness meta-score
 - [ ] Each dimension score is a float in [0.0, 1.0]
 - [ ] Composite score calculation is documented and configurable
 - [ ] Friction metric tracks inter-dimension tension

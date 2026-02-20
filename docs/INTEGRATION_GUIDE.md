@@ -179,7 +179,7 @@ docker compose logs -f sao
 [Phoenix](https://github.com/jbcupps/Phoenix) does not participate in runtime communication. Its integration role is:
 
 1. **Documentation hub**: Canonical architecture, interface contracts, and integration guides (this document)
-2. **Project tracking**: [GitHub Project board](https://github.com/users/jbcupps/projects/3) coordinates cross-repo issues
+2. **Project tracking**: [GitHub Project board](https://github.com/users/jbcupps/projects/4) coordinates cross-repo issues
 3. **Standards enforcement**: Naming conventions, commit conventions, and security boundaries defined in [CLAUDE.md](../CLAUDE.md)
 4. **Phase gating**: Build phase transitions require all repos to meet acceptance criteria defined in the [Roadmap](ROADMAP.md)
 
@@ -187,13 +187,33 @@ docker compose logs -f sao
 
 ![The Trust Chain](Diagrams/sao-04-trust-chain.png)
 
+```mermaid
+graph TD
+    Step1["1 — Enterprise Identity Provider<br/>Entra ID / Auth0 / Google Workspace<br/>Vouches for human users via OIDC"]
+    Step2["2 — SAO Admin Authentication<br/>WebAuthn/FIDO2 + OIDC session<br/>Admin unlocks vault, manages fleet"]
+    Step3["3 — SAO Master Key Signing<br/>Ed25519 master key signs each agent's<br/>public key into the trust chain"]
+    Step4["4 — Agent Identity (Orion Dock / Abigail)<br/>Agent authenticates to SAO with Ed25519<br/>Receives authorized keys"]
+    Step5["5 — Auditable Action<br/>Every action traceable:<br/>Agent → Master Key → Admin → IDP → Employee"]
+
+    Step1 -->|"OIDC token"| Step2
+    Step2 -->|"vault access"| Step3
+    Step3 -->|"Ed25519 signature"| Step4
+    Step4 -->|"authorized action"| Step5
+
+    P1["PROVES:<br/>This human is an authorized employee"] ~~~ Step1
+    P2["PROVES:<br/>This admin can provision agents"] ~~~ Step2
+    P3["PROVES:<br/>This agent was authorized by SAO"] ~~~ Step3
+    P4["PROVES:<br/>This is the same agent, verified"] ~~~ Step4
+    P5["AUDIT ANSWER:<br/>Who authorized this? Here's the chain."] ~~~ Step5
+```
+
 The trust chain flows from the Enterprise Identity Provider through SAO's vault and master key signing down to each agent's Ed25519 identity. Every action is traceable: Agent -> Master Key -> Admin -> IDP -> Employee.
 
 ## SAO Dashboard
 
 ![SAO Dashboard](Diagrams/sao-05-dashboard.png)
 
-The SAO dashboard provides real-time visibility into vault status, registered agents, stored secrets, and a full audit log of all agent and admin actions.
+The SAO dashboard (React + Tailwind) provides real-time visibility into vault status, registered agents, stored secrets, and a full audit log of all agent and admin actions. Key metrics: vault seal status, secret count, registered agent count, user count, and a time-sorted activity feed of agent auth, key access, and admin operations.
 
 ## Security Boundaries
 

@@ -1,8 +1,8 @@
 # Phoenix - AI Ethical Stack Coordination Hub
 
 ![Status](https://img.shields.io/badge/status-active-green)
-![Phase](https://img.shields.io/badge/current_phase-0-blue)
-[![Project Board](https://img.shields.io/badge/Project%20Board-View-blue)](https://github.com/users/jbcupps/projects/3)
+![Phase](https://img.shields.io/badge/current_phase-1-blue)
+[![Project Board](https://img.shields.io/badge/Project%20Board-AI__Ecosystem-blue)](https://github.com/users/jbcupps/projects/4)
 
 > "A system is a promise you keep at scale."
 
@@ -10,20 +10,76 @@ Phoenix coordinates the development of a unified AI ethical alignment platform a
 
 ## Architecture
 
+### Agent Identity Ecosystem
+
+![Agent Identity Ecosystem](docs/Diagrams/sao-01-ecosystem-overview.png)
+
 ```mermaid
 graph TD
-    Phoenix["Phoenix<br/>Coordination Hub"]
-    Abigail["Abigail<br/>Local-first Agent"]
-    SAO["SAO<br/>Secure Orchestrator"]
-    Ethics["Ethical_AI_Reg / Orion_dock<br/>Ethics + Runtime"]
-    Board["GitHub Project Board"]
+    IDP["Enterprise IDP<br/>Entra ID · Auth0 · Google · OIDC"]
 
-    Phoenix --> Abigail
-    Phoenix --> SAO
-    Phoenix --> Ethics
-    Phoenix --> Board
-    Abigail -- "REST + WebSocket<br/>(optional)" --> SAO
-    SAO -- "REST API<br/>/api/v1/" --> Ethics
+    subgraph SAO_BOX["SAO — Secure Agent Orchestrator"]
+        Vault["Cryptographic Vault"]
+        Registry["Agent Registry"]
+        WebAuthn["WebAuthn / FIDO2"]
+        OIDC["OIDC SSO Bridge"]
+        Audit["Full Audit Logging"]
+    end
+
+    subgraph Abigail_BOX["Abigail — Personal Agent"]
+        Tauri["Tauri Desktop App"]
+        LocalLLM["Local LLM (Ollama)"]
+        DPAPI["DPAPI Encrypted Keys"]
+        Constitution["Constitutional Values"]
+        Memory["Crystallized Memory"]
+    end
+
+    subgraph Orion_BOX["Orion Dock — Scalable Container Agents"]
+        RustWS["Rust Workspace (10 crates)"]
+        Docker["Docker Deployment"]
+        BirthCeremony["Birth Ceremony (Ed25519)"]
+        BicamRoute["Bicameral Routing"]
+        SkillSB["Skill Sandboxing"]
+    end
+
+    EthReg["Ethical_AI_Reg<br/>TriangleEthic Evaluation"]
+
+    IDP -- "OIDC auth" --> SAO_BOX
+    Abigail_BOX -- "retrieves keys" --> SAO_BOX
+    SAO_BOX -- "provisions agents" --> Orion_BOX
+    SAO_BOX -- "ethical eval" --> EthReg
+```
+
+### Orion Dock System Architecture
+
+![Orion Dock System Architecture](docs/Diagrams/01-architecture-overview.png)
+
+```mermaid
+graph TD
+    User["User / Mentor"] --> Frontend["React Frontend (Vite)"]
+    Frontend --> API["Orion API (Axum)"]
+
+    subgraph Core["Orion Core Services"]
+        API --> Birth["Birth Orchestrator<br/>Identity Ceremony"]
+        API --> Router["IdEgo Router<br/>Tier-Based Routing"]
+        API --> Skills["Skill Executor<br/>Sandboxed Tools"]
+        API --> MemStore["Memory Store<br/>Dual Backend"]
+        Keyring["Keyring/Vault"]
+        Docs["Docs"]
+        ProCouncil["Pro Council"]
+        MCP["MCP Servers"]
+        SkillPlugins["Skill Plugins"]
+    end
+
+    subgraph Infra["Infrastructure"]
+        SQLite["SQLite"]
+        Postgres["Postgres + pgvector"]
+        CloudLLM["OpenAI / Anthropic"]
+        LocalLLM2["Ollama (Local)"]
+    end
+
+    style Core fill:#1a1a2e
+    style Infra fill:#16213e
 ```
 
 ## Repositories
@@ -50,7 +106,51 @@ graph TD
 - **SAO** manages multiple agent identities and forwards ethical evaluations to Ethical_AI_Reg
 - **Ethical_AI_Reg** provides the TriangleEthic scoring engine (3 legs with embedded dual welfare) and alignment tracking
 - **Orion_dock** provides the containerized runtime for deploying and managing agent infrastructure
-- **Phoenix** tracks cross-repo coordination via [GitHub Project](https://github.com/users/jbcupps/projects/3)
+- **Phoenix** tracks cross-repo coordination via [AI_Ecosystem Project](https://github.com/users/jbcupps/projects/4)
+
+### The Trust Chain
+
+![The Trust Chain](docs/Diagrams/sao-04-trust-chain.png)
+
+```mermaid
+graph TD
+    Step1["1. Enterprise Identity Provider<br/>Entra ID / Auth0 / Google — OIDC"]
+    Step2["2. SAO — Admin Authentication<br/>WebAuthn/FIDO2 + OIDC session"]
+    Step3["3. SAO — Master Key Signing<br/>Ed25519 master key signs agent public keys"]
+    Step4["4. Agent Identity (Orion Dock / Abigail)<br/>Authenticates to SAO with Ed25519"]
+    Step5["5. Auditable Action<br/>Agent → Master Key → Admin → IDP → Employee"]
+
+    Step1 -->|"OIDC token"| Step2
+    Step2 -->|"vault access"| Step3
+    Step3 -->|"Ed25519 signature"| Step4
+    Step4 -->|"authorized action"| Step5
+```
+
+### The Bicameral Mind — IdEgo Routing
+
+![The Bicameral Mind](docs/Diagrams/04-bicameral-routing.png)
+
+```mermaid
+graph TD
+    Input["Incoming Message"] --> Router["IdEgo Router<br/>Complexity Analysis → Tier Selection"]
+
+    Router -->|"Simple queries"| Fast["⚡ FAST TIER<br/>Local Model (Ollama)<br/>Direct Response"]
+    Router -->|"Tool-assisted tasks"| Standard["🔧 STANDARD TIER<br/>Cloud LLM (w/ Tools)<br/>Skill Execution (Sandboxed)"]
+    Router -->|"Complex reasoning"| Pro["🏛️ PRO COUNCIL<br/>MoA · High-Stakes Decisions"]
+
+    subgraph ProDetail["Pro Council Detail"]
+        PA["Provider A Draft"] --> CB["A Critiques B"]
+        PB["Provider B Draft"] --> CA["B Critiques A"]
+        CB --> Synth["Synthesis (Best Answer)"]
+        CA --> Synth
+    end
+
+    Pro --> ProDetail
+
+    Fast --> Response["Agent Response"]
+    Standard --> Response
+    Synth --> Response
+```
 
 ## Theoretical Foundation
 
@@ -88,10 +188,14 @@ See [Roadmap](docs/ROADMAP.md) for detailed acceptance criteria.
 | [Ethics Framework](docs/ETHICS_FRAMEWORK.md) | Deep dive on TriangleEthic, Liberation Protocol, and embedded dual-welfare scoring |
 | [Blockchain Architecture](docs/blockchain-architecture.md) | Dual blockchain (EOB + PVB) design with DAO governance, cross-chain oracles |
 | [Glossary](docs/glossary.md) | Key terminology across the AI Ethical Stack |
+| [Research Paper (PDF)](docs/Toward%20a%20Decentralized%20Trust%20Framework%20.pdf) | Cupps & Bush (2026) — *Toward a Decentralized Trust Framework for Verifiable and Ethically Aligned AI* |
 
-## Project Board
+## Project Boards
 
-[AI Ethical Stack Project](https://github.com/users/jbcupps/projects/3)
+| Board | Scope |
+|-------|-------|
+| [AI_Ecosystem](https://github.com/users/jbcupps/projects/4) | Active cross-repo project with milestones, phases, and issues |
+| [AI Ethical Stack](https://github.com/users/jbcupps/projects/3) | Legacy tracking board |
 
 ## License
 
