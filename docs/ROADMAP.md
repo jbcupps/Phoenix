@@ -241,3 +241,43 @@ After the internal build plan completes, the paper's strategic roadmap continues
 - Integration with national AI infrastructure and transnational bodies (UN, WEF)
 - Full federated governance with meta-governance capabilities (changing how change occurs)
 - Ethical ontology library encompassing a plurality of normative systems
+
+
+---
+
+## Current Phase Status (Updated Feb 24, 2026)
+
+| Phase | Status | Blocker |
+|-------|--------|---------|
+| 0: Foundation | ✅ COMPLETE | — |
+| 1: Scoring Engine | 🔴 BLOCKED | Ethical_AI_Reg: no commits since Feb 7, PRs #5 and #6 failing CI. Phase 1 issues #7, #8, #9 untouched. |
+| 2: Multi-Agent Scoring | ⬜ NOT STARTED | Depends on Phase 1. SAO issues #4, #5, #6 ready to begin once scoring API delivered. |
+| 3: On-Chain Recording | ⬜ NOT STARTED | Depends on Phase 2. |
+| 4: Liberation Protocol | ⬜ NOT STARTED | Depends on Phase 3. |
+| 5: Agent Integration | ⬜ NOT STARTED | Depends on Phase 4. |
+
+### Critical Path
+
+The immediate critical path is:
+
+1. **Fix Ethical_AI_Reg Docker builds** (PR #6) — unblocks all development
+2. 2. **Implement TriangleEthic scoring API** (Ethical_AI_Reg #7) — `POST /api/v1/evaluate`
+   3. 3. **Implement dimension weight configuration** (Ethical_AI_Reg #8)
+      4. 4. **Implement friction calculation** (Ethical_AI_Reg #9)
+         5. 5. Once Phase 1 is delivered, SAO agent registration (#4) and ethical forwarding (#6) can begin
+           
+            6. ### Ahead-of-Roadmap Progress
+           
+            7. While Phase 1 is blocked, Abigail and Orion_dock have advanced significantly beyond Phase 0:
+           
+            8. - **Abigail:** Hive/Entity two-daemon separation, tier-based model routing, shared chat engine library crate, tool-use loop with memory persistence, full skill loading and execution
+               - - **Orion_dock:** Native Rust Council DAG engine (replaced Pro sidecar), dual-proxy egress boundary, agent self-awareness API, 4 Genesis paths for birth, superego safety refactor
+                 - - **SAO:** Full key vault platform with WebAuthn auth, encryption, React frontend, provisioning flow documentation
+                  
+                   - These advances are not gated by Phase 1 but will need to be aligned with the scoring engine once it is delivered.
+                  
+                   - ### Status Update Log
+                  
+                   - | Date | Cycle | Issue | Key Changes |
+                   - |------|-------|-------|-------------|
+                   - | Feb 24, 2026 | AM | [#6](https://github.com/jbcupps/Phoenix/issues/6) | Initial cross-repo status audit. Phase 1 blocked on Ethical_AI_Reg. |
