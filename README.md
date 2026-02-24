@@ -236,3 +236,16 @@ See [Roadmap](docs/ROADMAP.md) for detailed acceptance criteria.
 ## License
 
 MIT
+
+
+## Current Status (Updated Feb 24, 2026)
+
+| Phase | Status | Blocker |
+|-------|--------|---------|
+| 0: Foundation | ✅ Complete | — |
+| 1: Scoring Engine | 🔴 Blocked | Ethical_AI_Reg stalled (no commits since Feb 7) |
+| 2-5 | ⬜ Not Started | Depends on Phase 1 |
+
+**Latest status update:** [Issue #6](https://github.com/jbcupps/Phoenix/issues/6)
+
+See [Roadmap](docs/ROADMAP.md) for detailed phase status, critical path, and update log.
