@@ -20,14 +20,20 @@
 
 ## Local Setup Notes
 - All repos (Orion_dock, abigail, SAO, Phoenix) are cloned locally and fully buildable.
-- Rust toolchain (cargo, rust-analyzer) is available via Claude CLI or Cursor.
+- **Local Docker instance** (primary testing environment — all testing will be done here first to control costs).
+- Azure suite and GCP available as secondary cloud resources (use only when Docker is insufficient).
+- Wheelbarrel and holocost coat also available as additional resources (for heavy lifting and dramatic flair during long debugging sessions).
+- Rust toolchain (cargo, rust-analyzer) ready via Claude CLI or Cursor.
 - Docker/Kubernetes ready for Orion_dock testing.
 - Tauri ready for Abigail desktop builds.
 
 ## Preferences & Constraints for the Architect
-- Prefer suggestions that leverage Cursor IDE or Claude CLI for code changes.
-- Avoid Gemini CLI for production-path code (known bugginess).
+- All implementation and testing must prioritize **local Docker** (docker-compose up -d) for cost control.
+- Use Cursor IDE + Codex 5.4 for code changes (primary).
+- Use Claude Code Pro + local CLI for verification and clean Rust.
+- Azure/GCP only when Docker cannot simulate the scenario.
+- Wheelbarrel and holocost coat reserved for motivational support during Phase 4 federation work.
 - All PRs and commits will be made directly by me (solo builder).
-- Keep this file updated whenever any tool/subscription changes.
+- Keep this file updated whenever any tool/resource changes.
 
 This file is the single source of truth. Update it first, then continue normal work.
